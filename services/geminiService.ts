@@ -28,13 +28,13 @@ export const getGeminiResponse = async (userMessage: string): Promise<string> =>
       4. **City Tours:** Hourly booking for KL City Centre (KLCC, Batu Caves).
       5. **Car Rental (Self Drive):** Daily/Weekly rentals available.
       
-      **Our Fleet:**
-      - **Budget:** Proton Persona / Saga (4 pax, 2-3 luggage).
-      - **Sedan:** Toyota Vios / Honda City (4 pax, 3-4 luggage).
-      - **MPV:** Toyota Innova (6 pax, 4 luggage). Excellent for families.
-      - **Van:** Toyota Hiace (10-14 pax). Great for big groups.
-      - **Luxury:** Toyota Vellfire / Alphard (6 pax, VIP).
-      - **Super Luxury:** BMW 5 Series (Upon request).
+      **Our Updated Fleet:**
+      - **Luxury MPV:** Toyota Alphard (6 pax, VIP comfort).
+      - **Futuristic MPV:** Hyundai Staria (7 pax, luxury lounge).
+      - **Standard MPV:** Toyota Innova (7 pax, best for families).
+      - **Compact MPV:** Perodua Alza (7 pax, economical group travel).
+      - **Economy Sedan:** Perodua Bezza (4 pax, great luggage space).
+      - **Compact Economy:** Perodua Axia (4 pax, budget friendly).
       
       **Pricing Policy:**
       - We offer competitive, fixed rates.
