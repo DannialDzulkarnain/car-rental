@@ -2,10 +2,28 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+    <meta name="description" content="AJ Taxi KL - Professional Airport Transfers (KLIA/KLIA2), Genting Highlands, and Private Chauffeur services. Reliable 24/7 transport in Kuala Lumpur." />
+    <meta name="theme-color" content="#001a3d" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://ajtaxikl.com/" />
+    <meta property="og:title" content="AJ Taxi KL - Premium Airport Transfer & Chauffeur" />
+    <meta property="og:description" content="Book reliable 24/7 private transfers and airport pickups in KL. Professional drivers and premium fleet." />
+    <meta property="og:image" content="https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?auto=format&fit=crop&q=80&w=1200" />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:title" content="AJ Taxi KL - Premium Airport Transfer" />
+    <meta property="twitter:description" content="Reliable 24/7 private transfers in Kuala Lumpur. Book your KLIA transfer now." />
+    <meta property="twitter:image" content="https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?auto=format&fit=crop&q=80&w=1200" />
+
     <title>AJ Taxi KL - Premium Airport Transfer & Chauffeur</title>
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    
     <script>
       tailwind.config = {
         theme: {
@@ -18,13 +36,18 @@
               brand: {
                 50: '#f0f5fa',
                 100: '#e1ebf5',
+                200: '#c3d7eb',
+                300: '#95b7db',
+                400: '#5f8fc6',
                 500: '#004a99',
                 600: '#003a7a',
-                900: '#001a3d', // Deep AJ Blue
+                700: '#002e61',
+                800: '#00244d',
+                900: '#001a3d',
               },
               gold: {
                 400: '#ffdb4d',
-                500: '#fec200', // AJ Taxi Yellow
+                500: '#fec200',
                 600: '#e5af00',
               }
             },
@@ -51,6 +74,7 @@
         scroll-behavior: smooth;
         scroll-padding-top: 90px;
       }
+      /* Custom Scrollbar */
       ::-webkit-scrollbar {
         width: 8px;
       }
@@ -58,26 +82,34 @@
         background: #f1f1f1;
       }
       ::-webkit-scrollbar-thumb {
-        background: #004a99;
-        border-radius: 4px;
+        background: #001a3d;
+        border-radius: 10px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #fec200;
       }
       .animate-delay-100 { animation-delay: 0.1s; }
       .animate-delay-200 { animation-delay: 0.2s; }
       .animate-delay-300 { animation-delay: 0.3s; }
+      
+      /* Smooth transitions for interactive elements */
+      .transition-all { transition-duration: 300ms; }
     </style>
-  <script type="importmap">
-{
-  "imports": {
-    "lucide-react": "https://esm.sh/lucide-react@^0.562.0",
-    "@google/genai": "https://esm.sh/@google/genai@^1.34.0",
-    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
-    "react/": "https://esm.sh/react@^19.2.3/",
-    "react": "https://esm.sh/react@^19.2.3"
-  }
-}
-</script>
-</head>
+    
+    <script type="importmap">
+    {
+      "imports": {
+        "lucide-react": "https://esm.sh/lucide-react@^0.562.0",
+        "@google/genai": "https://esm.sh/@google/genai@^1.34.0",
+        "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+        "react/": "https://esm.sh/react@^19.2.3/",
+        "react": "https://esm.sh/react@^19.2.3"
+      }
+    }
+    </script>
+  </head>
   <body class="bg-gray-50 text-slate-900 antialiased font-sans">
     <div id="root"></div>
+    <!-- index.tsx is automatically imported by the environment -->
   </body>
 </html>
