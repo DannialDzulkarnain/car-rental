@@ -29,12 +29,12 @@ const App: React.FC = () => {
     }
 
     // Open WhatsApp Web/App with proper encoding
-    window.open(`https://wa.me/+601161309460?text=${encodeURIComponent(message)}`, '_blank');
+    window.open(`https://wa.me/+60107198186?text=${encodeURIComponent(message)}`, '_blank');
   }, []);
 
   const handleCarSelect = useCallback((carName: string) => {
     const message = `Hi AJ Taxi KL, I am interested in booking the *${carName}*. Is it available for my trip?`;
-    window.open(`https://wa.me/+601161309460?text=${encodeURIComponent(message)}`, '_blank');
+    window.open(`https://wa.me/+60107198186?text=${encodeURIComponent(message)}`, '_blank');
   }, []);
 
   return (
