@@ -10,7 +10,7 @@
   <meta name="description"
     content="Premium KLIA airport transfer & Toyota Alphard rental in KL. 24/7 private driver service. Formerly AJ Taxi. Book luxury MPV chauffeur now!" />
   <meta name="keywords"
-    content="KLIA transfer, Toyota Alphard rental KL, private driver Malaysia, airport chauffeur service, car rental with driver, MPV rental Kuala Lumpur, 24/7 booking" />
+    content="KLIA transfer, Toyota Alphard rental KL, private driver Malaysia, airport chauffeur service, car rental with driver, MPV rental Kuala Lumpur, 24/7 booking, teksi servis KL, taxi service Malaysia, limo service Kuala Lumpur, chauffeur service KL, van service Malaysia, Grab alternative, airport taxi, KL transport, private chauffeur, luxury car rental, executive transport, Toyota Vellfire rental, Hyundai Staria rental, Toyota Innova rental, Perodua Alza rental, Perodua Bezza car rental, Perodua Axia rental, Genting Highlands transport, Cameron Highlands taxi, Singapore to KL transfer, JB to KLIA, Malacca day trip, sewa kereta KL, kereta sewa murah, pemandu peribadi, sewa MPV, teksi KLIA murah, wedding car rental, corporate chauffeur, hourly chauffeur service, daily car rental KL" />
 
   <meta name="theme-color" content="#001a3d" />
   <link rel="icon" type="image/svg+xml" href="/logo.svg" />
@@ -64,7 +64,7 @@
           "email": "info@travthru.com",
           "image": "https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?auto=format&fit=crop&q=80&w=1200",
           "logo": "https://travthru.com/logo.svg",
-          "description": "TravThru (formerly AJ Taxi KL) - Premium car rental and private chauffeur service in Kuala Lumpur. Specializing in KLIA airport transfers, Toyota Alphard luxury MPV rental, and long-distance trips with professional drivers. Available 24/7 for tourists and business travelers.",
+          "description": "TravThru (formerly AJ Taxi KL) - Premium taxi service, limo service, and private chauffeur in Kuala Lumpur. Professional teksi servis offering KLIA airport transfers, Toyota Alphard luxury MPV rental, van service, and executive transport. Reliable Grab alternative with 24/7 availability for KL transport, business travel, and long-distance trips.",
           "priceRange": "$$",
           "currenciesAccepted": "MYR",
           "paymentAccepted": "Cash, Credit Card, Online Transfer",
@@ -105,21 +105,52 @@
         {
           "@type": "TaxiService",
           "@id": "https://travthru.com/#taxiservice",
-          "name": "TravThru Private Chauffeur Service",
-          "serviceType": "Private Chauffeur & Airport Transfer",
+          "name": "TravThru Taxi & Chauffeur Service",
+          "serviceType": ["Taxi Service", "Private Chauffeur", "Airport Transfer", "Limo Service", "Van Service", "Executive Transport", "Wedding Car Rental", "Corporate Transport", "Hourly Chauffeur"],
           "provider": {"@id": "https://travthru.com/#organization"},
+          "description": "Professional teksi servis and chauffeur service in KL. Premium alternative to Grab with luxury vehicles including Toyota Alphard, limo service, and van service for groups. Specializing in KLIA airport transfers and KL transport.",
           "areaServed": [
             {"@type": "City", "name": "Kuala Lumpur"},
             {"@type": "State", "name": "Selangor"},
             {"@type": "Place", "name": "KLIA"},
-            {"@type": "Place", "name": "KLIA2"}
+            {"@type": "Place", "name": "KLIA2"},
+            {"@type": "Place", "name": "Petaling Jaya"},
+            {"@type": "Place", "name": "Shah Alam"},
+            {"@type": "Place", "name": "Subang Jaya"}
           ],
           "availableChannel": {
             "@type": "ServiceChannel",
             "serviceUrl": "https://wa.me/60107198186",
             "servicePhone": "+60107198186",
             "availableLanguage": ["English", "Malay", "Chinese"]
-          }
+          },
+          "offers": [
+            {
+              "@type": "Offer",
+              "name": "Airport Taxi Service",
+              "description": "24/7 KLIA and KLIA2 airport transfer with flight tracking"
+            },
+            {
+              "@type": "Offer",
+              "name": "Limo Service KL",
+              "description": "Luxury limousine service with Toyota Alphard, Vellfire, and trusted private chauffeurs"
+            },
+            {
+              "@type": "Offer",
+              "name": "Van Service Malaysia",
+              "description": "Group transport with 7-seater MPV (Staria, Innova) and van rental with driver"
+            },
+            {
+              "@type": "Offer",
+              "name": "Private Chauffeur",
+              "description": "Professional driver service for business, personal travel, and hourly booking"
+            },
+            {
+              "@type": "Offer",
+              "name": "Wedding & Corporate",
+              "description": "Premium transport for weddings, events, and corporate client movements"
+            }
+          ]
         },
         {
           "@type": "AutoRental",
