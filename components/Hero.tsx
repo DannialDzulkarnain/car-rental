@@ -31,6 +31,8 @@ const Hero: React.FC = () => {
               src={img}
               alt={`Slide ${index + 1}`}
               className="w-full h-full object-cover scale-105"
+              loading="lazy"
+              decoding="async"
             />
             <div className="absolute inset-0 bg-gradient-to-b from-brand-900/80 via-brand-900/40 to-brand-900/95"></div>
           </div>
