@@ -250,6 +250,43 @@ const Navbar: React.FC = () => {
                 </button>
               )
             ))}
+
+            {/* Mobile Auth Buttons */}
+            <div className="pt-4 border-t border-white/10 mt-4">
+              {user ? (
+                <>
+                  {isAdmin && (
+                    <Link
+                      to="/admin/dashboard"
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="block py-2 text-xl font-bold uppercase tracking-wider text-gold-500 hover:text-white transition-colors"
+                    >
+                      Dashboard
+                    </Link>
+                  )}
+                  <button
+                    onClick={async () => {
+                      await logout();
+                      setMobileMenuOpen(false);
+                      navigate('/');
+                    }}
+                    className="block w-full text-left py-2 text-xl font-bold uppercase tracking-wider text-red-400 hover:text-red-300 transition-colors"
+                  >
+                    Logout
+                  </button>
+                </>
+              ) : (
+                <button
+                  onClick={() => {
+                    handleSignIn();
+                    setMobileMenuOpen(false);
+                  }}
+                  className="block w-full text-left py-2 text-xl font-bold uppercase tracking-wider text-white hover:text-gold-500 transition-colors"
+                >
+                  Sign In
+                </button>
+              )}
+            </div>
           </div>
           
           {/* Bottom CTA Buttons */}

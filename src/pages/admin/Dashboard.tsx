@@ -5,6 +5,22 @@ import { db } from '../../lib/firebase';
 import { collection, query, orderBy, onSnapshot, doc, updateDoc, deleteDoc } from 'firebase/firestore';
 import { Testimonial, Article, AppUser } from '../../../types';
 import ArticleEditor from './ArticleEditor';
+import { 
+  LayoutDashboard, 
+  MessageSquare, 
+  FileText, 
+  Users, 
+  LogOut, 
+  Plus, 
+  Trash2, 
+  Check, 
+  X, 
+  Shield, 
+  ShieldAlert,
+  Search,
+  ChevronRight,
+  Star
+} from 'lucide-react';
 
 const Dashboard: React.FC = () => {
     const navigate = useNavigate();
@@ -83,143 +99,205 @@ const Dashboard: React.FC = () => {
     };
 
     if (!user || !isAdmin) {
-        return <div className="p-10 text-center">Access Denied</div>;
+        return <div className="p-10 text-center text-gray-500">Access Denied</div>;
     }
 
   return (
-    <div className="min-h-screen bg-gray-100">
-      <nav className="bg-white shadow">
+    <div className="min-h-screen bg-gray-50 pb-24 md:pb-10">
+      {/* Mobile Header */}
+      <nav className="bg-white shadow-sm sticky top-0 z-30 lg:hidden">
+        <div className="px-4 h-16 flex items-center justify-between">
+           <div className="flex items-center gap-2">
+             <LayoutDashboard className="w-5 h-5 text-brand-900" />
+             <span className="font-bold text-lg text-brand-900">Dashboard</span>
+           </div>
+           <button onClick={handleLogout} className="p-2 text-gray-500 hover:text-red-600 transition-colors">
+             <LogOut className="w-5 h-5" />
+           </button>
+        </div>
+      </nav>
+
+      {/* Desktop Header */}
+      <nav className="hidden lg:block bg-white shadow-sm sticky top-0 z-30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex justify-between h-16">
-                <div className="flex items-center">
+                <div className="flex items-center gap-3">
+                    <LayoutDashboard className="w-6 h-6 text-brand-900" />
                     <h1 className="text-xl font-bold text-gray-900">Admin Dashboard</h1>
                 </div>
                 <div className="flex items-center gap-4">
-                    <span className="text-sm text-gray-500">{user.email}</span>
-                    <button onClick={handleLogout} className="text-sm text-red-600 hover:text-red-800">Logout</button>
+                    <span className="text-sm text-gray-500 font-medium">{user.email}</span>
+                    <button onClick={handleLogout} className="flex items-center gap-2 text-sm text-red-600 hover:text-red-800 font-medium px-4 py-2 rounded-lg hover:bg-red-50 transition-colors">
+                        <LogOut className="w-4 h-4" />
+                        Logout
+                    </button>
                 </div>
             </div>
         </div>
       </nav>
 
-      <main className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+      <main className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
         
-        {/* Tabs */}
-        <div className="border-b border-gray-200 mb-6">
+        {/* Desktop Tabs */}
+        <div className="hidden lg:block border-b border-gray-200 mb-8">
             <nav className="-mb-px flex space-x-8">
                 <button
                     onClick={() => setActiveTab('testimonials')}
-                    className={`${activeTab === 'testimonials' ? 'border-blue-500 text-blue-600' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'} whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm`}
+                    className={`${activeTab === 'testimonials' ? 'border-brand-600 text-brand-600' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'} whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm flex items-center gap-2`}
                 >
+                    <MessageSquare className="w-4 h-4" />
                     Testimonials
                 </button>
                 <button
                     onClick={() => setActiveTab('articles')}
-                    className={`${activeTab === 'articles' ? 'border-blue-500 text-blue-600' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'} whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm`}
+                    className={`${activeTab === 'articles' ? 'border-brand-600 text-brand-600' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'} whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm flex items-center gap-2`}
                 >
+                    <FileText className="w-4 h-4" />
                     Articles (SEO)
                 </button>
                 <button
                     onClick={() => setActiveTab('users')}
-                    className={`${activeTab === 'users' ? 'border-blue-500 text-blue-600' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'} whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm`}
+                    className={`${activeTab === 'users' ? 'border-brand-600 text-brand-600' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'} whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm flex items-center gap-2`}
                 >
-                    Users ({users.length})
+                    <Users className="w-4 h-4" />
+                    Users <span className="ml-1 bg-gray-100 text-gray-600 py-0.5 px-2 rounded-full text-xs">{users.length}</span>
                 </button>
             </nav>
         </div>
 
+        {/* Tab Content */}
+        
         {/* Testimonials Tab */}
         {activeTab === 'testimonials' && (
-            <div className="bg-white shadow overflow-hidden sm:rounded-md">
-                <ul className="divide-y divide-gray-200">
+            <div className="space-y-4">
+                <div className="flex items-center justify-between mb-4 lg:hidden">
+                    <h2 className="text-xl font-bold text-gray-800">Testimonials</h2>
+                </div>
+                
+                <div className="grid gap-4 md:gap-6">
                     {testimonials.map((t) => (
-                        <li key={t.id} className="px-6 py-4">
-                            <div className="flex items-center justify-between">
-                                <div>
-                                    <div className="flex items-center gap-2">
-                                        <h3 className="text-lg font-medium text-gray-900">{t.name}</h3>
-                                        {t.rating && <span className="text-yellow-500">{'★'.repeat(t.rating)}</span>}
-                                        {!t.approved && <span className="bg-yellow-100 text-yellow-800 text-xs px-2 py-0.5 rounded">Pending</span>}
+                        <div key={t.id} className="bg-white rounded-xl shadow-sm border border-gray-100 p-5 transition-all hover:shadow-md">
+                            <div className="flex justify-between items-start mb-3">
+                                <div className="flex items-center gap-3">
+                                    <div className="w-10 h-10 rounded-full bg-brand-50 flex items-center justify-center text-brand-600 font-bold text-lg">
+                                        {t.name.charAt(0)}
                                     </div>
-                                    <p className="text-sm text-gray-500">{t.role}</p>
-                                    <p className="mt-2 text-gray-700">{t.text}</p>
+                                    <div>
+                                        <h3 className="font-bold text-gray-900">{t.name}</h3>
+                                        <p className="text-xs text-gray-500">{t.role}</p>
+                                    </div>
                                 </div>
-                                <div className="flex gap-2">
-                                    <button 
-                                        onClick={() => handleApproveTestimonial(t.id!, t.approved)}
-                                        className={`px-3 py-1 rounded text-sm ${t.approved ? 'bg-orange-100 text-orange-700' : 'bg-green-100 text-green-700'}`}
-                                    >
-                                        {t.approved ? 'Unapprove' : 'Approve'}
-                                    </button>
-                                    <button 
-                                        onClick={() => handleDeleteTestimonial(t.id!)}
-                                        className="px-3 py-1 rounded text-sm bg-red-100 text-red-700"
-                                    >
-                                        Delete
-                                    </button>
+                                <div className={`px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wide ${t.approved ? 'bg-green-100 text-green-700' : 'bg-yellow-100 text-yellow-700'}`}>
+                                    {t.approved ? 'Approved' : 'Pending'}
                                 </div>
                             </div>
-                        </li>
+                            
+                            <div className="flex items-center gap-1 mb-3">
+                                {[...Array(t.rating || 5)].map((_, i) => (
+                                    <Star key={i} className="w-4 h-4 fill-current text-yellow-400" />
+                                ))}
+                            </div>
+                            
+                            <p className="text-gray-600 text-sm leading-relaxed mb-4">{t.text}</p>
+                            
+                            <div className="flex items-center gap-2 pt-4 border-t border-gray-50 mt-2">
+                                <button 
+                                    onClick={() => handleApproveTestimonial(t.id!, t.approved)}
+                                    className={`flex-1 flex items-center justify-center gap-2 py-2.5 rounded-lg text-sm font-semibold transition-colors ${t.approved ? 'bg-orange-50 text-orange-600 hover:bg-orange-100' : 'bg-green-50 text-green-600 hover:bg-green-100'}`}
+                                >
+                                    {t.approved ? <X className="w-4 h-4" /> : <Check className="w-4 h-4" />}
+                                    {t.approved ? 'Unapprove' : 'Approve'}
+                                </button>
+                                <button 
+                                    onClick={() => handleDeleteTestimonial(t.id!)}
+                                    className="px-4 py-2.5 rounded-lg bg-red-50 text-red-600 hover:bg-red-100 transition-colors"
+                                >
+                                    <Trash2 className="w-4 h-4" />
+                                </button>
+                            </div>
+                        </div>
                     ))}
-                    {testimonials.length === 0 && <li className="p-6 text-center text-gray-500">No testimonials found.</li>}
-                </ul>
+                    {testimonials.length === 0 && (
+                        <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-10 text-center">
+                             <div className="w-16 h-16 bg-gray-50 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <MessageSquare className="w-8 h-8 text-gray-300" />
+                             </div>
+                             <p className="text-gray-500 font-medium">No testimonials yet</p>
+                        </div>
+                    )}
+                </div>
             </div>
         )}
 
         {/* Articles Tab */}
         {activeTab === 'articles' && (
-            <div>
+            <div className="space-y-4">
                 {!showEditor ? (
-                    <div>
-                        <div className="flex justify-end mb-4">
+                    <>
+                        <div className="flex justify-between items-center mb-2">
+                            <h2 className="text-xl font-bold text-gray-800 lg:hidden">Articles</h2>
                             <button 
                                 onClick={() => setShowEditor(true)}
-                                className="bg-blue-600 text-white px-4 py-2 rounded shadow hover:bg-blue-700"
+                                className="bg-brand-600 text-white px-4 py-2.5 rounded-lg shadow-sm hover:bg-brand-700 flex items-center gap-2 font-medium text-sm transition-all active:scale-95"
                             >
-                                Write New Article
+                                <Plus className="w-4 h-4" />
+                                Write Article
                             </button>
                         </div>
-                        <div className="grid gap-6 lg:grid-cols-3">
+
+                        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
                             {articles.map((article) => (
-                                <div key={article.id} className="bg-white shadow rounded-lg overflow-hidden">
+                                <div key={article.id} className="bg-white shadow-sm hover:shadow-md transition-shadow rounded-xl overflow-hidden border border-gray-100 flex flex-col h-full">
                                      {article.image && (
-                                        <div className="h-48 w-full bg-cover bg-center" style={{ backgroundImage: `url(${article.image.startsWith('http') ? article.image : 'https://storage.bijokdev.com' + article.image})` }} />
-                                     )}
-                                     <div className="p-6">
-                                        <h3 className="font-bold text-xl mb-2">{article.title}</h3>
-                                        <p className="text-gray-600 text-sm mb-4 line-clamp-3">{article.excerpt}</p>
-                                        <div className="flex justify-between items-center text-sm text-gray-500 mb-4">
-                                            <span>{article.author}</span>
-                                            <span className={`px-2 py-1 rounded ${article.published ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800'}`}>
-                                                {article.published ? 'Published' : 'Draft'}
-                                            </span>
+                                        <div className="h-48 w-full bg-cover bg-center relative" style={{ backgroundImage: `url(${article.image.startsWith('http') ? article.image : 'https://storage.bijokdev.com' + article.image})` }}>
+                                             <div className="absolute top-3 right-3">
+                                                 <span className={`px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wide shadow-sm border border-white/20 backdrop-blur-md ${article.published ? 'bg-green-500/90 text-white' : 'bg-gray-500/90 text-white'}`}>
+                                                    {article.published ? 'Published' : 'Draft'}
+                                                 </span>
+                                             </div>
                                         </div>
+                                     )}
+                                     <div className="p-5 flex-1 flex flex-col">
+                                        <h3 className="font-bold text-lg mb-2 text-gray-900 leading-tight">{article.title}</h3>
+                                        <p className="text-gray-500 text-sm mb-4 line-clamp-2 flex-1">{article.excerpt}</p>
+                                        
+                                        <div className="flex items-center text-xs text-gray-400 mb-4 font-medium">
+                                            <Users className="w-3 h-3 mr-1" />
+                                            {article.author}
+                                        </div>
+
                                         {/* Action Buttons */}
-                                        <div className="flex gap-2">
+                                        <div className="grid grid-cols-3 gap-2 pt-4 border-t border-gray-50">
                                             <button 
                                                 onClick={() => { setEditingArticle(article); setShowEditor(true); }}
-                                                className="flex-1 px-3 py-2 rounded text-sm font-medium bg-blue-100 text-blue-700"
+                                                className="flex items-center justify-center py-2 rounded-lg text-sm font-medium bg-blue-50 text-blue-600 hover:bg-blue-100 transition-colors"
                                             >
                                                 Edit
                                             </button>
                                             <button 
                                                 onClick={() => handleTogglePublish(article.id!, article.published)}
-                                                className={`flex-1 px-3 py-2 rounded text-sm font-medium ${article.published ? 'bg-yellow-100 text-yellow-700' : 'bg-green-100 text-green-700'}`}
+                                                className={`flex items-center justify-center py-2 rounded-lg text-sm font-medium transition-colors ${article.published ? 'bg-yellow-50 text-yellow-600 hover:bg-yellow-100' : 'bg-green-50 text-green-600 hover:bg-green-100'}`}
                                             >
-                                                {article.published ? 'Unpublish' : 'Publish'}
+                                                {article.published ? 'Hide' : 'Post'}
                                             </button>
                                             <button 
                                                 onClick={() => handleDeleteArticle(article.id!)}
-                                                className="px-3 py-2 rounded text-sm font-medium bg-red-100 text-red-700"
+                                                className="flex items-center justify-center py-2 rounded-lg text-sm font-medium bg-red-50 text-red-600 hover:bg-red-100 transition-colors"
                                             >
-                                                Delete
+                                                <Trash2 className="w-4 h-4" />
                                             </button>
                                         </div>
                                      </div>
                                 </div>
                             ))}
+                            {articles.length === 0 && (
+                                <div className="col-span-full py-12 text-center bg-white rounded-xl border border-dashed border-gray-300">
+                                    <FileText className="w-12 h-12 text-gray-300 mx-auto mb-3" />
+                                    <p className="text-gray-500 font-medium">No articles created yet</p>
+                                </div>
+                            )}
                         </div>
-                    </div>
+                    </>
                 ) : (
                     <ArticleEditor 
                         onClose={() => { setShowEditor(false); setEditingArticle(null); }}
@@ -231,55 +309,102 @@ const Dashboard: React.FC = () => {
 
         {/* Users Tab */}
         {activeTab === 'users' && (
-            <div className="bg-white shadow overflow-hidden sm:rounded-md">
-                <ul className="divide-y divide-gray-200">
+            <div className="space-y-4">
+                 <div className="flex items-center justify-between mb-4 lg:hidden">
+                    <h2 className="text-xl font-bold text-gray-800">Users ({users.length})</h2>
+                </div>
+
+                <div className="grid gap-4 md:grid-cols-2">
                     {users.map((u) => (
-                        <li key={u.id} className="px-6 py-4">
-                            <div className="flex items-center justify-between">
-                                <div className="flex items-center gap-4">
-                                    {u.photoURL ? (
-                                        <img src={u.photoURL} alt={u.displayName} className="w-10 h-10 rounded-full" />
-                                    ) : (
-                                        <div className="w-10 h-10 rounded-full bg-gray-300 flex items-center justify-center text-gray-600 font-bold">
-                                            {u.displayName?.charAt(0) || u.email?.charAt(0) || '?'}
-                                        </div>
-                                    )}
-                                    <div>
-                                        <div className="flex items-center gap-2">
-                                            <h3 className="font-medium text-gray-900">{u.displayName || 'No Name'}</h3>
-                                            {u.isAdmin && (
-                                                <span className="bg-blue-100 text-blue-800 text-xs px-2 py-0.5 rounded">Admin</span>
-                                            )}
-                                        </div>
-                                        <p className="text-sm text-gray-500">{u.email}</p>
-                                        <p className="text-xs text-gray-400">
-                                            Last sign-in: {u.lastSignIn?.toDate?.()?.toLocaleString() || 'Unknown'}
-                                        </p>
+                        <div key={u.id} className="bg-white rounded-xl shadow-sm border border-gray-100 p-5 flex flex-col justify-between h-full">
+                            <div className="flex items-start gap-4 mb-4">
+                                {u.photoURL ? (
+                                    <img src={u.photoURL} alt={u.displayName} className="w-12 h-12 rounded-full border-2 border-white shadow-sm" />
+                                ) : (
+                                    <div className="w-12 h-12 rounded-full bg-brand-100 flex items-center justify-center text-brand-600 font-bold border-2 border-white shadow-sm">
+                                        {u.displayName?.charAt(0) || u.email?.charAt(0) || '?'}
                                     </div>
-                                </div>
-                                <div className="flex gap-2">
-                                    <button 
-                                        onClick={() => handleToggleAdmin(u.id!, u.isAdmin)}
-                                        className={`px-3 py-1 rounded text-sm ${u.isAdmin ? 'bg-orange-100 text-orange-700' : 'bg-blue-100 text-blue-700'}`}
-                                    >
-                                        {u.isAdmin ? 'Remove Admin' : 'Make Admin'}
-                                    </button>
-                                    <button 
-                                        onClick={() => handleDeleteUser(u.id!)}
-                                        className="px-3 py-1 rounded text-sm bg-red-100 text-red-700"
-                                    >
-                                        Delete
-                                    </button>
+                                )}
+                                <div>
+                                    <div className="flex items-center gap-2 flex-wrap">
+                                        <h3 className="font-bold text-gray-900 leading-none">{u.displayName || 'No Name'}</h3>
+                                        {u.isAdmin ? (
+                                            <span className="bg-brand-900 text-white text-[10px] uppercase font-bold px-2 py-0.5 rounded-full flex items-center gap-1">
+                                                <Shield className="w-3 h-3" /> Admin
+                                            </span>
+                                        ) : (
+                                            <span className="bg-gray-100 text-gray-600 text-[10px] uppercase font-bold px-2 py-0.5 rounded-full">User</span>
+                                        )}
+                                    </div>
+                                    <p className="text-sm text-gray-500 mt-1 break-all">{u.email}</p>
+                                    <p className="text-xs text-gray-400 mt-2 flex items-center gap-1">
+                                        <LayoutDashboard className="w-3 h-3" />
+                                        Last seen: {u.lastSignIn?.toDate?.()?.toLocaleDateString() || 'N/A'}
+                                    </p>
                                 </div>
                             </div>
-                        </li>
+                            
+                            <div className="flex gap-3 pt-4 border-t border-gray-50 mt-auto">
+                                <button 
+                                    onClick={() => handleToggleAdmin(u.id!, u.isAdmin)}
+                                    className={`flex-1 flex items-center justify-center gap-2 py-2 rounded-lg text-sm font-semibold transition-colors ${u.isAdmin ? 'bg-orange-50 text-orange-700 hover:bg-orange-100' : 'bg-brand-50 text-brand-700 hover:bg-brand-100'}`}
+                                >
+                                    {u.isAdmin ? <ShieldAlert className="w-4 h-4" /> : <Shield className="w-4 h-4" />}
+                                    {u.isAdmin ? 'Demote' : 'Promote'}
+                                </button>
+                                <button 
+                                    onClick={() => handleDeleteUser(u.id!)}
+                                    className="px-4 py-2 rounded-lg bg-red-50 text-red-600 hover:bg-red-100 transition-colors"
+                                >
+                                    <Trash2 className="w-4 h-4" />
+                                </button>
+                            </div>
+                        </div>
                     ))}
-                    {users.length === 0 && <li className="p-6 text-center text-gray-500">No users found.</li>}
-                </ul>
+                    {users.length === 0 && (
+                        <div className="col-span-full py-12 text-center text-gray-400">
+                             <Users className="w-12 h-12 mx-auto mb-3 opacity-50" />
+                             No users found
+                        </div>
+                    )}
+                </div>
             </div>
         )}
 
       </main>
+      
+      {/* Mobile Bottom Navigation */}
+      <nav className="fixed bottom-0 left-0 w-full bg-white border-t border-gray-200 z-50 lg:hidden pb-safe">
+        <div className="grid grid-cols-3 h-16">
+            <button
+                onClick={() => setActiveTab('testimonials')}
+                className={`flex flex-col items-center justify-center gap-1 transition-all duration-300 ${activeTab === 'testimonials' ? 'text-brand-600' : 'text-gray-400 hover:text-gray-600'}`}
+            >
+                <div className={`p-1.5 rounded-full transition-all ${activeTab === 'testimonials' ? 'bg-brand-50 translate-y-[-2px]' : ''}`}>
+                    <MessageSquare className={`w-6 h-6 ${activeTab === 'testimonials' ? 'fill-current' : ''}`} />
+                </div>
+                <span className="text-[10px] font-bold tracking-wide">Testimonials</span>
+            </button>
+            <button
+                onClick={() => setActiveTab('articles')}
+                className={`flex flex-col items-center justify-center gap-1 transition-all duration-300 ${activeTab === 'articles' ? 'text-brand-600' : 'text-gray-400 hover:text-gray-600'}`}
+            >
+                <div className={`p-1.5 rounded-full transition-all ${activeTab === 'articles' ? 'bg-brand-50 translate-y-[-2px]' : ''}`}>
+                    <FileText className={`w-6 h-6 ${activeTab === 'articles' ? 'fill-current' : ''}`} />
+                </div>
+                <span className="text-[10px] font-bold tracking-wide">SEO Articles</span>
+            </button>
+            <button
+                onClick={() => setActiveTab('users')}
+                className={`flex flex-col items-center justify-center gap-1 transition-all duration-300 ${activeTab === 'users' ? 'text-brand-600' : 'text-gray-400 hover:text-gray-600'}`}
+            >
+                <div className={`p-1.5 rounded-full transition-all ${activeTab === 'users' ? 'bg-brand-50 translate-y-[-2px]' : ''}`}>
+                    <Users className={`w-6 h-6 ${activeTab === 'users' ? 'fill-current' : ''}`} />
+                </div>
+                <span className="text-[10px] font-bold tracking-wide">Users</span>
+            </button>
+        </div>
+      </nav>
     </div>
   );
 };
