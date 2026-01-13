@@ -12,6 +12,18 @@ const Navbar: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
 
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [mobileMenuOpen]);
+
   // Handle navigation - redirect to homepage with hash if not on homepage
   const handleNavClick = (sectionId: string) => {
     setMobileMenuOpen(false);
@@ -197,15 +209,32 @@ const Navbar: React.FC = () => {
 
       {/* Mobile Menu Overlay */}
       {mobileMenuOpen && (
-        <div className="lg:hidden fixed inset-0 z-40 bg-white">
-          <div className="pt-24 px-6 space-y-4">
+        <div 
+          className="lg:hidden fixed top-0 left-0 w-screen h-screen z-[100] flex flex-col"
+          style={{ backgroundColor: '#001a3d' }} // Hardcoded brand-900 for guaranteed opacity
+        >
+          {/* Header with Logo and Close */}
+          <div className="flex justify-between items-center p-6">
+            <span className="font-serif text-xl font-black text-white">
+              <span className="text-gold-500">Trav</span>thru
+            </span>
+            <button
+              onClick={() => setMobileMenuOpen(false)}
+              className="p-2 rounded-lg bg-white/10 hover:bg-white/20 transition-colors"
+            >
+              <X className="h-6 w-6 text-white" />
+            </button>
+          </div>
+          
+          {/* Nav Links - Centered */}
+          <div className="flex-1 flex flex-col justify-center px-8 space-y-4">
             {navLinks.map((item) => (
               item.isRoute ? (
                 <Link
                   key={item.name}
                   to={item.path || '/'}
                   onClick={() => setMobileMenuOpen(false)}
-                  className="block py-4 text-lg font-black uppercase tracking-widest border-b border-gray-100 text-brand-900"
+                  className="py-2 text-3xl font-black uppercase tracking-wider text-white hover:text-gold-500 transition-colors"
                 >
                   {item.name}
                 </Link>
@@ -213,22 +242,26 @@ const Navbar: React.FC = () => {
                 <button
                   key={item.name}
                   onClick={() => handleNavClick(item.id)}
-                  className={`block w-full text-left py-4 text-lg font-black uppercase tracking-widest border-b border-gray-100 ${activeSection === item.id && isHomePage ? 'text-gold-500' : 'text-brand-900'}`}
+                  className={`text-left py-2 text-3xl font-black uppercase tracking-wider transition-colors ${
+                    activeSection === item.id && isHomePage ? 'text-gold-500' : 'text-white hover:text-gold-500'
+                  }`}
                 >
                   {item.name}
                 </button>
               )
             ))}
-            <div className="pt-8 space-y-4">
-              <a href="tel:0107198186" className="flex items-center justify-center w-full py-4 bg-brand-900 text-white rounded-xl font-black uppercase tracking-widest">
-                <Phone className="w-5 h-5 mr-3" />
-                Call Direct
-              </a>
-              <a href="https://wa.me/60107198186" className="flex items-center justify-center w-full py-4 bg-green-500 text-white rounded-xl font-black uppercase tracking-widest">
-                <MessageCircle className="w-5 h-5 mr-3" />
-                WhatsApp Support
-              </a>
-            </div>
+          </div>
+          
+          {/* Bottom CTA Buttons */}
+          <div className="p-6 space-y-3 pb-safe">
+            <a href="tel:0107198186" className="flex items-center justify-center w-full py-4 bg-white text-brand-900 rounded-xl font-bold text-lg hover:bg-gray-100 transition-colors">
+              <Phone className="w-5 h-5 mr-2" />
+              Call Direct
+            </a>
+            <a href="https://wa.me/60107198186" className="flex items-center justify-center w-full py-4 bg-green-500 text-white rounded-xl font-bold text-lg hover:bg-green-600 transition-colors">
+              <MessageCircle className="w-5 h-5 mr-2" />
+              WhatsApp
+            </a>
           </div>
         </div>
       )}
