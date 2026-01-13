@@ -6,7 +6,7 @@ import { ChatMessage } from '../types';
 const AIAssistant: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<ChatMessage[]>([
-    { role: 'model', text: 'Hi! I am AJ, your private chauffeur concierge. How can I assist with your transportation plans today?', timestamp: new Date() }
+    { role: 'model', text: 'Hi! I am TRAVTHRU, your private chauffeur concierge. How can I assist with your transportation plans today?', timestamp: new Date() }
   ]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -63,7 +63,7 @@ const AIAssistant: React.FC = () => {
         >
           <Bot className="w-6 h-6 text-gold-500" />
           <span className="hidden sm:block font-black uppercase tracking-widest text-[11px]">
-            Consult AJ AI
+            Consult TRAVTHRU
           </span>
         </button>
       )}
@@ -80,7 +80,7 @@ const AIAssistant: React.FC = () => {
               </div>
               <div>
                 <h3 className="font-black text-[10px] uppercase tracking-[0.2em] mb-0.5">Concierge Service</h3>
-                <p className="text-sm font-bold text-white/80">AJ Smart Assistant</p>
+                <p className="text-sm font-bold text-white/80">TRAVTHRU Smart Assistant</p>
               </div>
             </div>
             <button 

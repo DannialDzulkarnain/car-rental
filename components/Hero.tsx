@@ -49,7 +49,7 @@ const Hero: React.FC = () => {
               24/7 Available
             </span>
             <span className="px-3 py-1 bg-gold-500 text-brand-900 text-[10px] font-black uppercase tracking-widest rounded shadow-lg">
-              Official AJ Taxi KL
+              Official TRAVTHRU
             </span>
           </div>
 

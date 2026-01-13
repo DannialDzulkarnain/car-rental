@@ -1,10 +1,31 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, Car, Phone, MessageCircle } from 'lucide-react';
+import { Link, useNavigate } from 'react-router-dom';
+import { Menu, X, Car, Phone, MessageCircle, LogIn, LogOut } from 'lucide-react';
+import { useAuth } from '../src/context/AuthContext';
 
 const Navbar: React.FC = () => {
+  const { user, isAdmin, signInWithGoogle, logout, loading } = useAuth();
+  const navigate = useNavigate();
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
+
+  const handleSignIn = async () => {
+    try {
+      await signInWithGoogle();
+      // After sign-in, redirect to dashboard if admin
+      // The useEffect below will handle redirection based on user/isAdmin state
+    } catch (error) {
+      console.error('Sign-in failed:', error);
+    }
+  };
+
+  // Redirect to dashboard after successful admin sign-in
+  useEffect(() => {
+    if (user && isAdmin && !loading) {
+      navigate('/admin/dashboard');
+    }
+  }, [user, isAdmin, loading, navigate]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -36,6 +57,7 @@ const Navbar: React.FC = () => {
     { name: 'Fleet', id: 'fleet' },
     { name: 'Services', id: 'services' },
     { name: 'Contact', id: 'contact' },
+    { name: 'Blog', id: 'blog', isRoute: true, path: '/articles' },
   ];
 
   return (
@@ -64,19 +86,66 @@ const Navbar: React.FC = () => {
           {/* Desktop Menu */}
           <div className="hidden lg:flex items-center space-x-10">
             {navLinks.map((item) => (
-              <a
-                key={item.name}
-                href={`#${item.id}`}
-                className={`text-xs font-black uppercase tracking-widest transition-all duration-200 relative pb-1 group ${activeSection === item.id
-                  ? 'text-gold-500'
-                  : (isScrolled ? 'text-brand-900 hover:text-gold-500' : 'text-white/90 hover:text-white')
+              item.isRoute ? (
+                <Link
+                  key={item.name}
+                  to={item.path || '/'}
+                  className={`text-xs font-black uppercase tracking-widest transition-all duration-200 relative pb-1 group ${
+                    isScrolled ? 'text-brand-900 hover:text-gold-500' : 'text-white/90 hover:text-white'
                   }`}
-              >
-                {item.name}
-                <span className={`absolute bottom-0 left-0 h-0.5 bg-gold-500 transition-all duration-300 ${activeSection === item.id ? 'w-full' : 'w-0 group-hover:w-full'}`}></span>
-              </a>
+                >
+                  {item.name}
+                  <span className="absolute bottom-0 left-0 h-0.5 bg-gold-500 transition-all duration-300 w-0 group-hover:w-full"></span>
+                </Link>
+              ) : (
+                <a
+                  key={item.name}
+                  href={`#${item.id}`}
+                  className={`text-xs font-black uppercase tracking-widest transition-all duration-200 relative pb-1 group ${activeSection === item.id
+                    ? 'text-gold-500'
+                    : (isScrolled ? 'text-brand-900 hover:text-gold-500' : 'text-white/90 hover:text-white')
+                  }`}
+                >
+                  {item.name}
+                  <span className={`absolute bottom-0 left-0 h-0.5 bg-gold-500 transition-all duration-300 ${activeSection === item.id ? 'w-full' : 'w-0 group-hover:w-full'}`}></span>
+                </a>
+              )
             ))}
 
+            {/* Auth Button */}
+            {user ? (
+              <div className="flex items-center gap-3">
+                {isAdmin && (
+                  <Link
+                    to="/admin/dashboard"
+                    className={`text-xs font-black uppercase tracking-widest transition-all duration-200 ${
+                       isScrolled ? 'text-brand-900 hover:text-gold-500' : 'text-white/90 hover:text-white'
+                    }`}
+                  >
+                    Dashboard
+                  </Link>
+                )}
+                <button
+                  onClick={async () => { await logout(); navigate('/'); }}
+                  className={`flex items-center gap-1 text-xs font-black uppercase tracking-widest transition-all duration-200 ${
+                     isScrolled ? 'text-red-600 hover:text-red-700' : 'text-red-400 hover:text-red-300'
+                  }`}
+                >
+                  <LogOut className="w-4 h-4" />
+                  Logout
+                </button>
+              </div>
+            ) : (
+              <button
+                onClick={handleSignIn}
+                className={`flex items-center gap-1 text-xs font-black uppercase tracking-widest transition-all duration-200 relative pb-1 group ${
+                   isScrolled ? 'text-brand-900 hover:text-gold-500' : 'text-white/90 hover:text-white'
+                }`}
+              >
+                <LogIn className="w-4 h-4" />
+                Sign In
+              </button>
+            )}
             <a
               href="https://wa.me/60107198186"
               className={`flex items-center px-6 py-2.5 rounded-lg text-[10px] font-black uppercase tracking-widest transition-all transform hover:scale-105 shadow-md ${isScrolled ? 'bg-brand-900 text-white hover:bg-brand-800' : 'bg-gold-500 text-brand-900 hover:bg-gold-400'

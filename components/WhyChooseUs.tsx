@@ -53,7 +53,7 @@ const WhyChooseUs: React.FC = () => {
                         Our Advantages
                     </span>
                     <h2 className="text-4xl lg:text-6xl font-serif font-bold text-white mb-6 italic">
-                        Why Choose AJ Taxi KL
+                        Why Choose TravThru
                     </h2>
                     <div className="h-1.5 w-24 bg-gold-500 mx-auto rounded-full"></div>
                     <p className="mt-8 text-gray-300 max-w-2xl mx-auto font-medium text-sm sm:text-base leading-relaxed">

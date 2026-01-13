@@ -6,7 +6,7 @@ const FAQ: React.FC = () => {
 
     const faqs = [
         {
-            question: 'How do I book a ride with AJ Taxi KL?',
+            question: 'How do I book a ride with TravThru?',
             answer: 'You can book instantly via WhatsApp by clicking the "Book Now" button, or fill out our booking form on the website. We\'ll confirm your booking within minutes with driver details.'
         },
         {

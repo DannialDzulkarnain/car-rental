@@ -35,7 +35,7 @@ const Features: React.FC = () => {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-serif font-bold text-white mb-4">The AJ Standard</h2>
+          <h2 className="text-3xl md:text-4xl font-serif font-bold text-white mb-4">The TRAVTHRU Standard</h2>
           <div className="h-1 w-20 bg-gold-500 mx-auto rounded-full"></div>
           <p className="mt-4 text-brand-100 max-w-2xl mx-auto">
             Just like premium private transportation services, we adhere to strict standards of excellence for our Kereta Sewa and Chauffeur services.

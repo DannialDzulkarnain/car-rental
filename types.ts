@@ -4,7 +4,8 @@ export enum CarCategory {
   MPV = 'MPV',
   SUV = 'SUV',
   LUXURY = 'Luxury',
-  VAN = 'Van'
+  VAN = 'Van',
+  BUS = 'Bus'
 }
 
 export interface Car {
@@ -34,4 +35,38 @@ export interface ChatMessage {
   role: 'user' | 'model';
   text: string;
   timestamp: Date;
+}
+
+export interface Testimonial {
+  id?: string;
+  name: string;
+  role: string;
+  text: string;
+  rating: number;
+  approved: boolean; 
+  createdAt?: any; 
+}
+
+export interface Article {
+  id?: string;
+  title: string;
+  slug: string;
+  content: string; 
+  image: string;
+  excerpt: string;
+  author: string;
+  published: boolean;
+  createdAt?: any;
+  updatedAt?: any;
+}
+
+export interface AppUser {
+  id?: string;
+  uid: string;
+  email: string;
+  displayName: string;
+  photoURL?: string;
+  isAdmin: boolean;
+  lastSignIn: any;
+  createdAt?: any;
 }

@@ -5,7 +5,7 @@ const Services: React.FC = () => {
   const services = [
     {
       icon: <Plane className="w-8 h-8 text-brand-500" />,
-      title: "Airport Taxi & Transfer Service",
+      title: "Airport TRAVTHRU & Transfer Service",
       description: "24/7 KLIA and KLIA2 airport transfer. Professional teksi servis with flight tracking. Reliable alternative to Grab with fixed rates and no surge pricing."
     },
     {

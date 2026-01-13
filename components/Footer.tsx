@@ -12,11 +12,11 @@ const Footer: React.FC = () => {
             <div className="flex items-center space-x-2">
               <Car className="h-8 w-8 text-white" />
               <span className="font-serif text-2xl font-bold">
-                AJ<span className="text-gold-500">Taxi KL</span>
+                TRAVTHRU
               </span>
             </div>
             <p className="text-brand-100 text-sm leading-relaxed">
-              Aj Private Chauffeur Enterprise.<br />
+              TRAVTHRU Private Chauffeur Enterprise.<br />
               Your professional partner for KLIA transfers, Genting Highlands trips, and private chauffeur services in Malaysia.
             </p>
             <div className="flex space-x-4">
@@ -81,7 +81,7 @@ const Footer: React.FC = () => {
         </div>
 
         <div className="border-t border-brand-800 pt-8 text-center text-xs text-brand-200">
-          <p>&copy; {new Date().getFullYear()} Aj Private Chauffeur Enterprise. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} TRAVTHRU Private Chauffeur Enterprise. All rights reserved.</p>
         </div>
       </div>
     </footer>

@@ -29,7 +29,7 @@ const CTABanner: React.FC = () => {
                         Ready for your <span className="text-transparent bg-clip-text bg-gradient-to-r from-gold-400 to-gold-600">Premium Ride?</span>
                     </h2>
                     <p className="text-gray-300 text-base sm:text-lg mb-12 font-medium leading-relaxed max-w-2xl mx-auto">
-                        Get instant quotes and professional service. Whether it's for business, airport transfers, or leisure, drive in style with AJ Taxi KL.
+                        Get instant quotes and professional service. Whether it's for business, airport transfers, or leisure, drive in style with TravThru.
                     </p>
 
                     {/* CTA Buttons */}

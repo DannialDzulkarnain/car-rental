@@ -8,6 +8,10 @@ export default defineConfig({
     sourcemap: true
   },
   server: {
-    port: 3000
+    port: 3000,
+    headers: {
+      // Fix for Firebase popup auth COOP warning
+      'Cross-Origin-Opener-Policy': 'same-origin-allow-popups',
+    }
   }
 });
