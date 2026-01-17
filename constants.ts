@@ -51,11 +51,11 @@ export const CAR_FLEET: Car[] = [
   },
   {
     id: "4",
-    name: "Hyundai Staria",
+    name: "Hyundai Staria or similar",
     category: CarCategory.MPV,
     pricePerDay: 850,
     priceTransfer: 300,
-    seats: 7,
+    seats: 6,
     image: "/car-rental-images/hyundai.jpeg",
     gallery: ["/car-rental-images/hyundai.jpeg"],
     features: [
